@@ -82,7 +82,7 @@
   </head>
   <body class="mixpanel-platform-body" style="overflow-x:scroll;">
       <div id="eventSelect" style="visibility: hidden"></div>
-      <div class="label">Max Flow Length:</div>
+      <div class="label" style="visibility: hidden">Max Flow Length:</div>
       <input id="pathLength" value="2" style="visibility: hidden">
       <button id="run" value="Run">Run</button>
       <div id="dateRange" style="float: right;"></div>
@@ -276,7 +276,9 @@
           $('#run').css('display', 'inline-block');
         });
         
-        $('#run').on('click', function(e){
+        setTimeout(function(e){
+          
+          
           path_length = $('#pathLength').val();
           var rootEvent = rootEventSelect.val();
           var queryParams = {
@@ -289,7 +291,7 @@
             cqResult = results[0];
             mapFlow();
           });
-        });
+        }), 500);
         
         // flow
         function mapFlow() {
