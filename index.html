@@ -350,7 +350,7 @@
             flow.current = flow.current || flow;
             for (var i = 0; i < events.length; i++) {
               var e = events[i];
-              if (flow.depth === 0 && !(e.name == "Viewed Page" && (events[i].properties.utm_source == 'confirmation-email' || events[i].properties.utm_source == 'prearrival-email'))) {
+              if (flow.depth === 0 && !(e.name == "Viewed Page" && (e.properties.utm_source == 'confirmation-email' || e.properties.utm_source == 'prearrival-email'))) {
                 // ignore events until we see the starting event
                 continue;
               }
@@ -358,12 +358,14 @@
                 // break after we hit the max depth
                 return flow;
               }
-              flow.depth++;
-              flow.current[e.name] =
-                flow.current[e.name] || {'count': 0, 'next': {}};
-        
-              flow.current[e.name].count++;
-              flow.current = flow.current[e.name].next;
+              if !(e.name == 'Viewed Page' && flow.depth == 1) {
+                flow.depth++;
+                flow.current[e.name] =
+                  flow.current[e.name] || {'count': 0, 'next': {}};
+          
+                flow.current[e.name].count++;
+                flow.current = flow.current[e.name].next;
+              }
             }
             return flow;
           })
