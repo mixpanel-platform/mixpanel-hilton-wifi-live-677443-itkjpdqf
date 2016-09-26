@@ -344,7 +344,7 @@
             flow.current = flow.current || flow;
             for (var i = 0; i < events.length; i++) {
               var e = events[i];
-              if (flow.depth === 0 && e.name != params.first_event && (events[i].properties.utm_source == 'confirmation-email' || events[i].properties.utm_source == 'prearrival-email')) {
+              if (flow.depth === 0 && !(e.name == params.first_event && (events[i].properties.utm_source == 'confirmation-email' || events[i].properties.utm_source == 'prearrival-email'))) {
                 // ignore events until we see the starting event
                 continue;
               }
