@@ -266,19 +266,7 @@
           return 15/count;
         }
         
-        // UI dropdowns & buttons
-        date.on('change', function(e, dates) {
-          params.from = dates.from;
-          params.to = dates.to;
-        });
-        
-        rootEventSelect.on('change', function(e, Name){
-          $('#run').css('display', 'inline-block');
-        });
-        
-        setTimeout(function(e){
-          
-          
+        function run(e){
           path_length = $('#pathLength').val();
           var rootEvent = rootEventSelect.val();
           var queryParams = {
@@ -291,7 +279,23 @@
             cqResult = results[0];
             mapFlow();
           });
-        }, 500);
+        }
+        
+        
+        // UI dropdowns & buttons
+        date.on('change', function(e, dates) {
+          params.from = dates.from;
+          params.to = dates.to;
+          run();
+        });
+        
+        rootEventSelect.on('change', function(e, Name){
+          $('#run').css('display', 'inline-block');
+        });
+        
+        
+        
+        setTimeout(run, 500);
         
         // flow
         function mapFlow() {
