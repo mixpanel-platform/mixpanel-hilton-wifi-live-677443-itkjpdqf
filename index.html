@@ -81,9 +81,9 @@
     </style>
   </head>
   <body class="mixpanel-platform-body" style="overflow-x:scroll;">
-      <div id="eventSelect"></div>
+      <div id="eventSelect" style="visibility: hidden"></div>
       <div class="label">Max Flow Length:</div>
-      <input id="pathLength" value="4">
+      <input id="pathLength" value="2" style="visibility: hidden">
       <button id="run" value="Run">Run</button>
       <div id="dateRange" style="float: right;"></div>
       <div id="flow"></div>
@@ -344,7 +344,7 @@
             flow.current = flow.current || flow;
             for (var i = 0; i < events.length; i++) {
               var e = events[i];
-              if (flow.depth === 0 && !(e.name == params.first_event && (events[i].properties.utm_source == 'confirmation-email' || events[i].properties.utm_source == 'prearrival-email'))) {
+              if (flow.depth === 0 && !(e.name == "Viewed Page" && (events[i].properties.utm_source == 'confirmation-email' || events[i].properties.utm_source == 'prearrival-email'))) {
                 // ignore events until we see the starting event
                 continue;
               }
