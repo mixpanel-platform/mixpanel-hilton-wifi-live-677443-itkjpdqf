@@ -358,14 +358,14 @@
                 // break after we hit the max depth
                 return flow;
               }
-              if !(e.name == 'Viewed Page' && flow.depth == 1) {
+              //if !(e.name == 'Viewed Page' && flow.depth == 1) {
                 flow.depth++;
                 flow.current[e.name] =
                   flow.current[e.name] || {'count': 0, 'next': {}};
           
                 flow.current[e.name].count++;
                 flow.current = flow.current[e.name].next;
-              }
+              //}
             }
             return flow;
           })
